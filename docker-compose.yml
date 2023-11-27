@@ -30,6 +30,6 @@ services:
     ports:
       - 9001:3000
 
-volumes:
-  mysql-data:
+#volumes:
+#  mysql-data:
 
