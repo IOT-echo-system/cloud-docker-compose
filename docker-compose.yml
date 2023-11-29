@@ -12,23 +12,37 @@ services:
     ports:
       - 9000:9000
 
-#  mysql:
-#    image: mysql:latest
-#    container_name: cloud-mysql
+  mongo:
+    image: mongo:4.4.18
+    container_name: mongo
+    restart: unless-stopped
+    ports:
+      - 37017:27017
+    env_file:
+      - .env
+
+  mqtt:
+    container_name: mqtt
+    image: eclipse-mosquitto
+    restart: always
+    volumes:
+      - ${MQTT_PATH}/config:/mosquitto/config
+      - ${MQTT_PATH}/data:/mosquitto/data
+      - ${MQTT_PATH}/log:/mosquitto/log
+    ports:
+      - 1883:1883
+
+#  node-bff:
+#    container_name: node-bff
+#    image: shiviraj/node-bff:latest
 #    restart: unless-stopped
-#    ports:
-#      - 3306:3306
-#    volumes:
-#      - mysql-data:/var/lib/mysql
-#    env_file:
-#      - .env
+#    depends_on:
+#      - mqtt
 
   cloud-ui:
     image: shiviraj/cloud-ui:latest
     container_name: cloud-ui
     restart: unless-stopped
-    ports:
-      - 9001:3000
 
 #volumes:
 #  mysql-data:
