@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   nginx:
-    image: nginx
+    image: nginx:stable-perl
     container_name: cloud-nginx
     restart: unless-stopped
     depends_on:
@@ -23,7 +23,7 @@ services:
 
   mqtt:
     container_name: mqtt
-    image: eclipse-mosquitto
+    image: eclipse-mosquitto:1.6.15
     restart: always
     volumes:
       - ${MQTT_PATH}/config:/mosquitto/config
@@ -33,16 +33,19 @@ services:
       - 1883:1883
 
   zookeeper:
-    image: bitnami/zookeeper:3.6.3
+    image: bitnami/zookeeper:3.7.2
     container_name: zookeeper
     restart: unless-stopped
     ports:
       - 2181:2181
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+    volumes:
+      - ./zookeeper/data:/bitnami/zookeeper/data
+      - ./zookeeper/logs:/bitnami/zookeeper/logs
 
   kafka:
-    image: bitnami/kafka:2.8.0
+    image: bitnami/kafka:3.2.3
     container_name: kafka
     restart: unless-stopped
     ports:
@@ -54,8 +57,8 @@ services:
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
-    depends_on:
-      - zookeeper
+    volumes:
+      - ./kafka/data:/bitnami/kafka/data
 
 #  node-bff:
 #    container_name: node-bff
