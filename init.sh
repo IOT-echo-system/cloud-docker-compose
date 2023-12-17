@@ -12,3 +12,6 @@ log_dest file /mosquitto/log/mosquitto.log
 connection_messages true
 password_file /mosquitto/config/pwfile' >> ./mqtt/config/mosquitto.conf
 sudo touch ./mqtt/config/pwfile
+
+mkdir -p mongo-data
+sudo chown -R $USER mongo-data
