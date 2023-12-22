@@ -17,3 +17,4 @@ mkdir -p mongo-data
 sudo chown -R $USER mongo-data
 
 mkdir -p jenkins
+chmod 777 jenkins
