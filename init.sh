@@ -15,3 +15,5 @@ sudo touch ./mqtt/config/pwfile
 
 mkdir -p mongo-data
 sudo chown -R $USER mongo-data
+
+mkdir -p jenkins
