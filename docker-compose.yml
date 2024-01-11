@@ -68,7 +68,6 @@ services:
       PORT: 9001
       MONGODB_URL: ${MONGODB_URL}
       SERVICE_REGISTRY_URL: http://service-registry:8761
-      SECRET_KEY: ${SECRET_KEY}
     networks:
       - cloud-network
 

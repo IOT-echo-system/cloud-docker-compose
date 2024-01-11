@@ -1,6 +1,6 @@
 #! /bin/bash
 
-mkdir -p ./mqtt/data ./mqtt/config ./mqtt/log ./zookeeper/data ./zookeeper/log ./kafka/data
+mkdir -p ./mqtt/data ./mqtt/config ./mqtt/log
 touch ./mqtt/config/mosquitto.conf
 sudo echo 'persistence true
 persistence_location /mosquitto/data
