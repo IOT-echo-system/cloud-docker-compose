@@ -71,6 +71,20 @@ services:
     networks:
       - cloud-network
 
+  audit-service:
+    image: shiviraj/audit-service:latest
+    container_name: audit-service
+    restart: unless-stopped
+    environment:
+      PORT: 9002
+      MONGODB_URL: ${MONGODB_URL}
+      SERVICE_REGISTRY_URL: http://service-registry:8761
+      MQTT_BROKER: mqtt://mqtt:1883
+      MQTT_USERNAME: ${MQTT_USERNAME}
+      MQTT_PASSWORD: ${MQTT_PASSWORD}
+    networks:
+      - cloud-network
+
   auth-service:
     image: shiviraj/auth-service:latest
     container_name: auth-service
