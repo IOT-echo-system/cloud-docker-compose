@@ -25,6 +25,8 @@ services:
       - ./mqtt/log:/mosquitto/log
     ports:
       - 1883:1883
+    networks:
+      - cloud-network
 
   mongo:
     image: mongo:4.4.18
@@ -79,7 +81,7 @@ services:
       PORT: 9002
       MONGODB_URL: mongodb://mongo:27017
       SERVICE_REGISTRY_URL: http://service-registry:8761
-      MQTT_BROKER: mqtt://mqtt:1883
+      MQTT_BROKER: tcp://mqtt:1883
       MQTT_USERNAME: ${MQTT_USERNAME}
       MQTT_PASSWORD: ${MQTT_PASSWORD}
     networks:
@@ -93,6 +95,9 @@ services:
       PORT: 9001
       MONGODB_URL: mongodb://mongo:27017
       SERVICE_REGISTRY_URL: http://service-registry:8761
+      MQTT_BROKER: tcp://mqtt:1883
+      MQTT_USERNAME: ${MQTT_USERNAME}
+      MQTT_PASSWORD: ${MQTT_PASSWORD}
     networks:
       - cloud-network
 
