@@ -116,6 +116,21 @@ services:
     networks:
       - cloud-network
 
+  account-service:
+    image: shiviraj/account-service:latest
+    container_name: account-service
+    restart: unless-stopped
+    environment:
+      PORT: 9004
+      SERVICE_REGISTRY_URL: http://service-registry:8761
+      MQTT_BROKER: tcp://mqtt:1883
+      MQTT_USERNAME: ${MQTT_USERNAME}
+      MQTT_PASSWORD: ${MQTT_PASSWORD}
+      EMAIL: ${EMAIL}
+      PASSWORD: ${PASSWORD}
+    networks:
+      - cloud-network
+
 
 #  node-bff:
 #    container_name: node-bff
