@@ -103,7 +103,7 @@ services:
 
   communication-service:
     image: shiviraj/communication-service:latest
-    container_name: audit-service
+    container_name: communication-service
     restart: unless-stopped
     environment:
       PORT: 9003
