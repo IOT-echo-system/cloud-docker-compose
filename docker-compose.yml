@@ -73,6 +73,20 @@ services:
     networks:
       - cloud-network
 
+  auth-service:
+    image: shiviraj/auth-service:latest
+    container_name: auth-service
+    restart: unless-stopped
+    environment:
+      PORT: 9001
+      MONGODB_URL: mongodb://mongo:27017
+      SERVICE_REGISTRY_URL: http://service-registry:8761
+      MQTT_BROKER: tcp://mqtt:1883
+      MQTT_USERNAME: ${MQTT_USERNAME}
+      MQTT_PASSWORD: ${MQTT_PASSWORD}
+    networks:
+      - cloud-network
+
   audit-service:
     image: shiviraj/audit-service:latest
     container_name: audit-service
@@ -87,19 +101,21 @@ services:
     networks:
       - cloud-network
 
-  auth-service:
-    image: shiviraj/auth-service:latest
-    container_name: auth-service
+  communication-service:
+    image: shiviraj/communication-service:latest
+    container_name: audit-service
     restart: unless-stopped
     environment:
-      PORT: 9001
-      MONGODB_URL: mongodb://mongo:27017
+      PORT: 9003
       SERVICE_REGISTRY_URL: http://service-registry:8761
       MQTT_BROKER: tcp://mqtt:1883
       MQTT_USERNAME: ${MQTT_USERNAME}
       MQTT_PASSWORD: ${MQTT_PASSWORD}
+      EMAIL: ${EMAIL}
+      PASSWORD: ${PASSWORD}
     networks:
       - cloud-network
+
 
 #  node-bff:
 #    container_name: node-bff
