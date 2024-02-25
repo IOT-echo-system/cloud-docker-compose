@@ -118,6 +118,7 @@ services:
     restart: unless-stopped
     environment:
       PORT: 9004
+      MONGODB_URL: mongodb://mongo:27017
       MQTT_BROKER: tcp://mqtt:1883
       MQTT_USERNAME: ${MQTT_USERNAME}
       MQTT_PASSWORD: ${MQTT_PASSWORD}
