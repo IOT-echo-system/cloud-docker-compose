@@ -21,6 +21,19 @@ services:
     networks:
       - cloud-network
 
+  robotutor-tech-backend:
+    image: shiviraj/robotutor-tech-backend:latest
+    container_name: robotutor-tech-backend
+    restart: unless-stopped
+    environment:
+      PORT: 5001
+      MONGODB_URL: ${MONGODB_URL}
+      EMAIL_HOST: ${EMAIL_HOST}
+      EMAIL_PORT: ${EMAIL_PORT}
+      EMAIL: ${EMAIL}
+      PASSWORD: ${PASSWORD}
+    networks:
+      - cloud-network
 
 networks:
   cloud-network:
