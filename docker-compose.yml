@@ -56,88 +56,22 @@ services:
     restart: unless-stopped
     environment:
       PORT: 3001
-      API_GATEWAY_BASE_URL: http://api-gateway:4000
+      API_GATEWAY_BASE_URL: http://cloud-backend-service:4000
     networks:
       - cloud-network
 
-  api-gateway:
-    image: shiviraj/api-gateway:latest
-    container_name: api-gateway
+  cloud-backend-service:
+    image: shiviraj/cloud-backend-service:latest
+    container_name: cloud-backend-service
     restart: unless-stopped
     environment:
-      PORT: 4000
-      AUTH_SERVICE_PORT: 9001
-      ACCOUNT_SERVICE_PORT: 9004
-      USER_SERVICE_PORT: 9005
-    depends_on:
-      - auth-service
-    networks:
-      - cloud-network
-
-  auth-service:
-    image: shiviraj/auth-service:latest
-    container_name: auth-service
-    restart: unless-stopped
-    environment:
-      PORT: 9001
+      PORT: 4001
       MONGODB_URL: mongodb://mongo:27017
       MQTT_BROKER: tcp://mqtt:1883
       MQTT_USERNAME: ${MQTT_USERNAME}
       MQTT_PASSWORD: ${MQTT_PASSWORD}
     networks:
       - cloud-network
-
-  audit-service:
-    image: shiviraj/audit-service:latest
-    container_name: audit-service
-    restart: unless-stopped
-    environment:
-      PORT: 9002
-      MONGODB_URL: mongodb://mongo:27017
-      MQTT_BROKER: tcp://mqtt:1883
-      MQTT_USERNAME: ${MQTT_USERNAME}
-      MQTT_PASSWORD: ${MQTT_PASSWORD}
-    networks:
-      - cloud-network
-
-  communication-service:
-    image: shiviraj/communication-service:latest
-    container_name: communication-service
-    restart: unless-stopped
-    environment:
-      PORT: 9003
-      MQTT_BROKER: tcp://mqtt:1883
-      MQTT_USERNAME: ${MQTT_USERNAME}
-      MQTT_PASSWORD: ${MQTT_PASSWORD}
-      EMAIL: ${EMAIL}
-      PASSWORD: ${PASSWORD}
-    networks:
-      - cloud-network
-
-  account-service:
-    image: shiviraj/account-service:latest
-    container_name: account-service
-    restart: unless-stopped
-    environment:
-      PORT: 9004
-      MONGODB_URL: mongodb://mongo:27017
-      MQTT_BROKER: tcp://mqtt:1883
-      MQTT_USERNAME: ${MQTT_USERNAME}
-      MQTT_PASSWORD: ${MQTT_PASSWORD}
-      EMAIL: ${EMAIL}
-      PASSWORD: ${PASSWORD}
-    networks:
-      - cloud-network
-
-
-#  node-bff:
-#    container_name: node-bff
-#    image: shiviraj/node-bff:latest
-#    restart: unless-stopped
-#    depends_on:
-#      - cloud-bff
-#    environment:
-#      PORT: 3002
 
 networks:
   cloud-network:
