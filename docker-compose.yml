@@ -56,7 +56,7 @@ services:
     restart: unless-stopped
     environment:
       PORT: 3001
-      API_GATEWAY_BASE_URL: http://cloud-backend-service:4000
+      API_GATEWAY_BASE_URL: http://cloud-backend-service:4001
     networks:
       - cloud-network
 
@@ -70,6 +70,9 @@ services:
       MQTT_BROKER: tcp://mqtt:1883
       MQTT_USERNAME: ${MQTT_USERNAME}
       MQTT_PASSWORD: ${MQTT_PASSWORD}
+      EMAIL_HOST: ${EMAIL_HOST}
+      EMAIL: ${EMAIL}
+      PASSWORD: ${PASSWORD}
     networks:
       - cloud-network
 

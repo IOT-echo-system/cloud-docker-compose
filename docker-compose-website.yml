@@ -27,11 +27,11 @@ services:
     restart: unless-stopped
     environment:
       PORT: 5001
-      MONGODB_URL: ${MONGODB_URL}
-      EMAIL_HOST: ${EMAIL_HOST}
-      EMAIL_PORT: ${EMAIL_PORT}
-      EMAIL: ${EMAIL}
-      PASSWORD: ${PASSWORD}
+      MONGODB_URL: ${WEBSITE_MONGODB_URL}
+      EMAIL_HOST: ${WEBSITE_EMAIL_HOST}
+      EMAIL_PORT: ${WEBSITE_EMAIL_PORT}
+      EMAIL: ${WEBSITE_EMAIL}
+      PASSWORD: ${WEBSITE_PASSWORD}
     networks:
       - cloud-network
 
