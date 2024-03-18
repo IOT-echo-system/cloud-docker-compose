@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  nginx:
+  cloud-nginx:
     image: nginx:stable-perl
     container_name: cloud-nginx
     restart: unless-stopped
