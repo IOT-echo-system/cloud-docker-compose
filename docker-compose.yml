@@ -15,14 +15,27 @@ services:
     networks:
       - cloud-network
 
-  mqtt:
-    container_name: mqtt
+  backend-mqtt:
+    container_name: backend-mqtt
     image: eclipse-mosquitto
     restart: always
     volumes:
-      - ./mqtt/config:/mosquitto/config
-      - ./mqtt/data:/mosquitto/data
-      - ./mqtt/log:/mosquitto/log
+      - ./backend-mqtt/config:/mosquitto/config
+      - ./backend-mqtt/data:/mosquitto/data
+      - ./backend-mqtt/log:/mosquitto/log
+    ports:
+      - 1884:1884
+    networks:
+      - cloud-network
+
+  node-mqtt:
+    container_name: node-mqtt
+    image: eclipse-mosquitto
+    restart: always
+    volumes:
+      - ./node-mqtt/config:/mosquitto/config
+      - ./node-mqtt/data:/mosquitto/data
+      - ./node-mqtt/log:/mosquitto/log
     ports:
       - 1883:1883
     networks:
@@ -67,7 +80,7 @@ services:
     environment:
       PORT: 4001
       MONGODB_URL: mongodb://mongo:27017
-      MQTT_BROKER: tcp://mqtt:1883
+      MQTT_BROKER: tcp://backend-mqtt:1884
       MQTT_USERNAME: ${MQTT_USERNAME}
       MQTT_PASSWORD: ${MQTT_PASSWORD}
       EMAIL_HOST: ${EMAIL_HOST}
