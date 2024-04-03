@@ -73,6 +73,16 @@ services:
     networks:
       - cloud-network
 
+  node-bff:
+    image: shiviraj/node-bff:latest
+    container_name: node-bff
+    restart: unless-stopped
+    environment:
+      API_GATEWAY_BASE_URL: http://cloud-backend-service:4001
+      MQTT_URL: mqtt://node-mqtt:1883
+    networks:
+      - cloud-network
+
   cloud-backend-service:
     image: shiviraj/cloud-backend-service:latest
     container_name: cloud-backend-service
