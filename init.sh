@@ -11,7 +11,7 @@ allow_anonymous false
 log_dest stdout
 log_dest file /mosquitto/log/mosquitto.log
 connection_messages true
-password_file /mosquitto/config/pwfile' >> ./backend-mqtt/config/mosquitto.conf
+password_file /mosquitto/config/pwfile' > ./backend-mqtt/config/mosquitto.conf
 
 mkdir -p ./node-mqtt/data ./node-mqtt/config ./node-mqtt/log
 touch ./node-mqtt/config/mosquitto.conf
@@ -26,7 +26,7 @@ allow_anonymous true
 log_dest stdout
 log_dest file /mosquitto/log/mosquitto.log
 connection_messages true
-password_file /mosquitto/config/pwfile' >> ./node-mqtt/config/mosquitto.conf
+password_file /mosquitto/config/pwfile' > ./node-mqtt/config/mosquitto.conf
 
 mkdir -p mongo-data
 sudo chown -R $USER mongo-data
