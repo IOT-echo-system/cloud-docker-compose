@@ -20,6 +20,8 @@ sudo echo 'persistence true
 persistence_location /mosquitto/data
 user mosquitto
 listener 1883
+listener 9001
+protocol websockets
 allow_anonymous true
 log_dest stdout
 log_dest file /mosquitto/log/mosquitto.log
