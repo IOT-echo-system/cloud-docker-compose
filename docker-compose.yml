@@ -38,7 +38,6 @@ services:
       - ./node-mqtt/log:/mosquitto/log
     ports:
       - 1883:1883
-      - 9001:9001
     networks:
       - cloud-network
 
@@ -81,6 +80,7 @@ services:
     environment:
       API_GATEWAY_BASE_URL: http://cloud-backend-service:4001
       MQTT_URL: mqtt://node-mqtt:1883
+      ENVIRONMENT: prod
     networks:
       - cloud-network
 
