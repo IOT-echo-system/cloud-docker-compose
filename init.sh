@@ -15,7 +15,6 @@ password_file /mosquitto/config/pwfile' > ./backend-mqtt/config/mosquitto.conf
 
 mkdir -p ./node-mqtt/data ./node-mqtt/config ./node-mqtt/log
 touch ./node-mqtt/config/mosquitto.conf
-touch ./node-mqtt/config/pwfile
 touch ./node-mqtt/config/dynamic-security.json
 sudo echo 'persistence true
 persistence_location /mosquitto/data
@@ -28,7 +27,7 @@ plugin_opt_config_file /mosquitto/config/dynamic-security.json
 log_dest stdout
 log_dest file /mosquitto/log/mosquitto.log
 connection_messages true
-password_file /mosquitto/config/pwfile' > ./node-mqtt/config/mosquitto.conf
+acl_file /path/to/acl.conf' > ./node-mqtt/config/mosquitto.conf
 
 mkdir -p mongo-data
 sudo chown -R $USER mongo-data
