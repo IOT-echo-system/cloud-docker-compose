@@ -81,6 +81,8 @@ services:
       API_GATEWAY_BASE_URL: http://cloud-backend-service:4001
       MQTT_URL: mqtt://node-mqtt:1883
       ENVIRONMENT: prod
+      MQTT_USERNAME: ${NODE_MQTT_USERNAME}
+      MQTT_PASSWORD: ${NODE_MQTT_PASSWORD}
     networks:
       - cloud-network
 
