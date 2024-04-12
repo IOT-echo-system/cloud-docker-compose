@@ -99,6 +99,7 @@ services:
       EMAIL_HOST: ${EMAIL_HOST}
       EMAIL: ${EMAIL}
       PASSWORD: ${PASSWORD}
+      NODE_BFF_URL: http://node-bff:3002
     networks:
       - cloud-network
 
