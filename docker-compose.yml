@@ -52,14 +52,15 @@ services:
     volumes:
       - ./mongo-data:/data/db
 
-  cloud-ui:
-    image: shiviraj/cloud-ui:latest
-    container_name: cloud-ui
+  mongo-backup:
+    image: shiviraj/mongo-backup:latest
+    container_name: mongo-backup
     restart: unless-stopped
-    depends_on:
-      - cloud-bff
     environment:
-      PORT: 3000
+      MONGODB_URL: mongodb://mongo:27017
+      PAT: ${PAT}
+    depends_on:
+      - mongo
     networks:
       - cloud-network
 
