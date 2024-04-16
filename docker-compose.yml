@@ -64,6 +64,17 @@ services:
     networks:
       - cloud-network
 
+  cloud-ui:
+    image: shiviraj/cloud-ui:latest
+    container_name: cloud-ui
+    restart: unless-stopped
+    depends_on:
+      - cloud-bff
+    environment:
+      PORT: 3000
+    networks:
+      - cloud-network
+
   cloud-bff:
     image: shiviraj/cloud-bff:latest
     container_name: cloud-bff
