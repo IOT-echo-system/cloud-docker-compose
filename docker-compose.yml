@@ -53,12 +53,13 @@ services:
       - ./mongo-data:/data/db
 
   mongo-backup:
-    image: shiviraj/mongo-backup:latest
+    image: shiviraj/mongo-backup:arm64
     container_name: mongo-backup
     restart: unless-stopped
     environment:
       MONGODB_URL: mongodb://mongo:27017
       PAT: ${PAT}
+      CRON: ${DB_BACKUP_CRON:-'0 0,12 * * *'}
     depends_on:
       - mongo
     networks:
