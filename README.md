@@ -1,4 +1,4 @@
-# Robotutor Tech IOT Plateform
+# Robotutor Tech IOT Platform
 
 ## Steps to start
 - start `sudo sh init.sh`
