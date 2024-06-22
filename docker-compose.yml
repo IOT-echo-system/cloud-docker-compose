@@ -55,7 +55,8 @@ services:
       - ./bff-mqtt/data:/mosquitto/data
       - ./bff-mqtt/log:/mosquitto/log
     ports:
-      - 1885:1883
+      - 1885:1885
+      - 1886:1883
     networks:
       - cloud-network
 
@@ -101,6 +102,9 @@ services:
     environment:
       PORT: 3001
       API_GATEWAY_BASE_URL: http://cloud-backend-service:4001
+      MQTT_URL: mqtt://bff-mqtt:1883
+      MQTT_USERNAME: ${BFF_MQTT_USERNAME}
+      MQTT_PASSWORD: ${BFF_MQTT_PASSWORD}
     networks:
       - cloud-network
 
@@ -131,6 +135,7 @@ services:
       EMAIL: ${EMAIL}
       PASSWORD: ${PASSWORD}
       NODE_BFF_URL: http://node-bff:3002
+      CLOUD_BFF_URL: http://cloud-bff:3001
     networks:
       - cloud-network
 
