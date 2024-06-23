@@ -46,20 +46,6 @@ services:
     networks:
       - cloud-network
 
-  bff-mqtt:
-    container_name: bff-mqtt
-    image: eclipse-mosquitto
-    restart: always
-    volumes:
-      - ./bff-mqtt/config:/mosquitto/config
-      - ./bff-mqtt/data:/mosquitto/data
-      - ./bff-mqtt/log:/mosquitto/log
-    ports:
-      - 1885:1885
-      - 1886:1883
-    networks:
-      - cloud-network
-
   mongo:
     image: mongo:4.4.18
     container_name: mongo
