@@ -1,10 +1,10 @@
 version: '3.8'
 services:
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    container_name: cloudflared
-    restart: unless-stopped
-    command: tunnel --no-autoupdate run --token ${CLOUDFLARED_TOKEN}
+#  cloudflared:
+#    image: cloudflare/cloudflared:latest
+#    container_name: cloudflared
+#    restart: unless-stopped
+#    command: tunnel --no-autoupdate run --token ${CLOUDFLARED_TOKEN}
 
   cloud-nginx:
     image: nginx:stable-perl
@@ -57,20 +57,20 @@ services:
     volumes:
       - ./mongo-data:/data/db
 
-  mongo-backup:
-    image: shiviraj/db-backup:arm64
-    container_name: mongo-backup
-    restart: unless-stopped
-    environment:
-      DB_URL: mongodb://mongo:27017
-      CRON: ${DB_BACKUP_CRON:-'0 0,12 * * *'}
-      GIT_REPOSITORY: ${GIT_REPOSITORY}
-      USER_EMAIL: ${USER_EMAIL}
-      USER_NAME: ${USER_NAME}
-    depends_on:
-      - mongo
-    networks:
-      - cloud-network
+#  mongo-backup:
+#    image: shiviraj/db-backup:arm64
+#    container_name: mongo-backup
+#    restart: unless-stopped
+#    environment:
+#      DB_URL: mongodb://mongo:27017
+#      CRON: ${DB_BACKUP_CRON:-'0 0,12 * * *'}
+#      GIT_REPOSITORY: ${GIT_REPOSITORY}
+#      USER_EMAIL: ${USER_EMAIL}
+#      USER_NAME: ${USER_NAME}
+#    depends_on:
+#      - mongo
+#    networks:
+#      - cloud-network
 
   cloud-ui:
     image: shiviraj/cloud-ui:latest
@@ -89,7 +89,7 @@ services:
     restart: unless-stopped
     environment:
       PORT: 3001
-      API_GATEWAY_BASE_URL: http://cloud-backend-service:4001
+      API_GATEWAY_BASE_URL: http://auth-service:9001
       MQTT_URL: mqtt://bff-mqtt:1883
       MQTT_USERNAME: ${BFF_MQTT_USERNAME}
       MQTT_PASSWORD: ${BFF_MQTT_PASSWORD}
@@ -101,7 +101,7 @@ services:
     container_name: node-bff
     restart: unless-stopped
     environment:
-      API_GATEWAY_BASE_URL: http://cloud-backend-service:4001
+      API_GATEWAY_BASE_URL: http://auth-service:9001
       MQTT_URL: mqtt://node-mqtt:1883
       ENVIRONMENT: prod
       MQTT_USERNAME: ${NODE_MQTT_USERNAME}
@@ -109,21 +109,35 @@ services:
     networks:
       - cloud-network
 
-  cloud-backend-service:
-    image: shiviraj/cloud-backend-service:latest
-    container_name: cloud-backend-service
+  auth-service:
+    image: shiviraj/auth-service:latest
+    container_name: auth-service
     restart: unless-stopped
     environment:
-      PORT: 4001
+      PORT: 9001
       MONGODB_URL: mongodb://mongo:27017
       MQTT_BROKER: tcp://backend-mqtt:1883
       MQTT_USERNAME: ${MQTT_USERNAME}
       MQTT_PASSWORD: ${MQTT_PASSWORD}
-      EMAIL_HOST: ${EMAIL_HOST}
-      EMAIL: ${EMAIL}
-      PASSWORD: ${PASSWORD}
       NODE_BFF_URL: http://node-bff:3002
       CLOUD_BFF_URL: http://cloud-bff:3001
+      USER_SERVICE_BASE_URL: http://user-service:9002
+    networks:
+      - cloud-network
+
+  user-service:
+    image: shiviraj/user-service:latest
+    container_name: user-service
+    restart: unless-stopped
+    environment:
+      PORT: 9002
+      MONGODB_URL: mongodb://mongo:27017
+      MQTT_BROKER: tcp://backend-mqtt:1883
+      MQTT_USERNAME: ${MQTT_USERNAME}
+      MQTT_PASSWORD: ${MQTT_PASSWORD}
+      NODE_BFF_URL: http://node-bff:3002
+      CLOUD_BFF_URL: http://cloud-bff:3001
+      AUTH_SERVICE_BASE_URL: http://auth-service:9002
     networks:
       - cloud-network
 
