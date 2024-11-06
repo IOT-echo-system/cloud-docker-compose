@@ -140,7 +140,7 @@ services:
       MQTT_PASSWORD: ${MQTT_PASSWORD}
       NODE_BFF_URL: http://node-bff:3002
       CLOUD_BFF_URL: http://cloud-bff:3001
-      AUTH_SERVICE_BASE_URL: http://auth-service:9002
+      AUTH_SERVICE_BASE_URL: http://auth-service:9001
       INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
     networks:
       - cloud-network
