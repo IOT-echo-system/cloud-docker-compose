@@ -145,6 +145,21 @@ services:
     networks:
       - cloud-network
 
+  audit-service:
+    image: shiviraj/audit-service:latest
+    container_name: audit-service
+    restart: unless-stopped
+    environment:
+      PORT: 9003
+      MONGODB_URL: mongodb://mongo:27017
+      MQTT_BROKER: tcp://backend-mqtt:1883
+      MQTT_USERNAME: ${MQTT_USERNAME}
+      MQTT_PASSWORD: ${MQTT_PASSWORD}
+      AUTH_SERVICE_BASE_URL: http://auth-service:9001
+      INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
+    networks:
+      - cloud-network
+
 networks:
   cloud-network:
     driver: bridge
