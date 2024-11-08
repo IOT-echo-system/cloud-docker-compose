@@ -125,6 +125,7 @@ services:
       CLOUD_BFF_URL: http://cloud-bff:3001
       USER_SERVICE_BASE_URL: http://user-service:9002
       INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
     networks:
       - cloud-network
 
