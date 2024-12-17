@@ -103,7 +103,6 @@ services:
 
   cloud-ui:
     image: shiviraj/cloud-ui:latest
-    container_name: cloud-ui
     restart: unless-stopped
     depends_on:
       - cloud-bff
@@ -118,7 +117,6 @@ services:
 
   cloud-bff:
     image: shiviraj/cloud-bff:latest
-    container_name: cloud-bff
     restart: unless-stopped
     environment:
       PORT: 3001
@@ -150,7 +148,6 @@ services:
 
   auth-service:
     image: shiviraj/auth-service:latest
-    container_name: auth-service
     restart: unless-stopped
     environment:
       PORT: 9001
@@ -171,7 +168,6 @@ services:
 
   user-service:
     image: shiviraj/user-service:latest
-    container_name: user-service
     restart: unless-stopped
     environment:
       PORT: 9002
@@ -189,7 +185,6 @@ services:
 
   audit-service:
     image: shiviraj/audit-service:latest
-    container_name: audit-service
     restart: unless-stopped
     environment:
       PORT: 9003
