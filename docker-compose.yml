@@ -176,6 +176,7 @@ services:
       CLOUD_BFF_URL: http://cloud-bff:3001
       AUTH_SERVICE_BASE_URL: http://auth-service:9001
       INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
+      KAFKA_BOOTSTRAP_BROKERS: kafka:3030
     deploy:
       replicas: 2
       restart_policy:
@@ -191,6 +192,7 @@ services:
       MONGODB_URL: mongodb://mongo:27017
       AUTH_SERVICE_BASE_URL: http://auth-service:9001
       INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
+      KAFKA_BOOTSTRAP_BROKERS: kafka:3030
     deploy:
       replicas: 2
       restart_policy:
