@@ -20,14 +20,13 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:latest
-    container_name: kafka
     restart: unless-stopped
     depends_on:
       - zookeeper
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:3030
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:3030
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:3030
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     ports:
