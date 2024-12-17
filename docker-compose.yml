@@ -151,13 +151,11 @@ services:
     environment:
       PORT: 9001
       MONGODB_URL: mongodb://mongo:27017
-      MQTT_BROKER: tcp://backend-mqtt:1883
-      MQTT_USERNAME: ${MQTT_USERNAME}
-      MQTT_PASSWORD: ${MQTT_PASSWORD}
       NODE_BFF_URL: http://node-bff:3002
       CLOUD_BFF_URL: http://cloud-bff:3001
       USER_SERVICE_BASE_URL: http://user-service:9002
       INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
+      KAFKA_BOOTSTRAP_BROKERS: kafka:3030
     deploy:
       replicas: 2
       restart_policy:
