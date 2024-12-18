@@ -34,19 +34,6 @@ services:
     networks:
       - cloud-network
 
-  backend-mqtt:
-    container_name: backend-mqtt
-    image: eclipse-mosquitto
-    restart: always
-    volumes:
-      - ./backend-mqtt/config:/mosquitto/config
-      - ./backend-mqtt/data:/mosquitto/data
-      - ./backend-mqtt/log:/mosquitto/log
-    ports:
-      - 1884:1883
-    networks:
-      - cloud-network
-
   node-mqtt:
     container_name: node-mqtt
     image: eclipse-mosquitto
