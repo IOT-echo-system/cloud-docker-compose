@@ -94,10 +94,6 @@ services:
       - cloud-bff
     environment:
       PORT: 3000
-    deploy:
-      replicas: 2
-      restart_policy:
-        condition: on-failure
     networks:
       - cloud-network
 
@@ -109,10 +105,6 @@ services:
       API_GATEWAY_BASE_URL: http://auth-service:9001
       AUTH_SERVICE_BASE_URL: http://auth-service:9001
       USER_SERVICE_BASE_URL: http://user-service:9002
-    deploy:
-      replicas: 2
-      restart_policy:
-        condition: on-failure
     networks:
       - cloud-network
 
@@ -140,10 +132,6 @@ services:
       USER_SERVICE_BASE_URL: http://user-service:9002
       INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
       KAFKA_BOOTSTRAP_BROKERS: kafka:3030
-    deploy:
-      replicas: 2
-      restart_policy:
-        condition: on-failure
     networks:
       - cloud-network
 
@@ -158,10 +146,6 @@ services:
       AUTH_SERVICE_BASE_URL: http://auth-service:9001
       INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
       KAFKA_BOOTSTRAP_BROKERS: kafka:3030
-    deploy:
-      replicas: 2
-      restart_policy:
-        condition: on-failure
     networks:
       - cloud-network
 
@@ -174,10 +158,18 @@ services:
       AUTH_SERVICE_BASE_URL: http://auth-service:9001
       INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
       KAFKA_BOOTSTRAP_BROKERS: kafka:3030
-    deploy:
-      replicas: 2
-      restart_policy:
-        condition: on-failure
+    networks:
+      - cloud-network
+
+  premises-service:
+    image: shiviraj/premises-service:latest
+    restart: unless-stopped
+    environment:
+      PORT: 9004
+      MONGODB_URL: mongodb://mongo:27017
+      AUTH_SERVICE_BASE_URL: http://auth-service:9001
+      INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
+      KAFKA_BOOTSTRAP_BROKERS: kafka:3030
     networks:
       - cloud-network
 
