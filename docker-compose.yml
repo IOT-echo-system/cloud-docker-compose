@@ -34,18 +34,18 @@ services:
     networks:
       - cloud-network
 
-#  node-mqtt:
-#    container_name: node-mqtt
-#    image: eclipse-mosquitto
-#    restart: always
-#    volumes:
-#      - ./node-mqtt/config:/mosquitto/config
-#      - ./node-mqtt/data:/mosquitto/data
-#      - ./node-mqtt/log:/mosquitto/log
-#    ports:
-#      - 1883:1883
-#    networks:
-#      - cloud-network
+  #  node-mqtt:
+  #    container_name: node-mqtt
+  #    image: eclipse-mosquitto
+  #    restart: always
+  #    volumes:
+  #      - ./node-mqtt/config:/mosquitto/config
+  #      - ./node-mqtt/data:/mosquitto/data
+  #      - ./node-mqtt/log:/mosquitto/log
+  #    ports:
+  #      - 1883:1883
+  #    networks:
+  #      - cloud-network
 
   mongo:
     image: mongo:4.4.18
@@ -102,24 +102,24 @@ services:
     restart: unless-stopped
     environment:
       PORT: 3001
-      API_GATEWAY_BASE_URL: http://auth-service:9001
       AUTH_SERVICE_BASE_URL: http://auth-service:9001
       USER_SERVICE_BASE_URL: http://user-service:9002
+      PREMISES_SERVICE_BASE_URL: http://premises-service:9004
     networks:
       - cloud-network
 
-#  node-bff:
-#    image: shiviraj/node-bff:latest
-#    container_name: node-bff
-#    restart: unless-stopped
-#    environment:
-#      API_GATEWAY_BASE_URL: http://auth-service:9001
-#      MQTT_URL: mqtt://node-mqtt:1883
-#      ENVIRONMENT: prod
-#      MQTT_USERNAME: ${NODE_MQTT_USERNAME}
-#      MQTT_PASSWORD: ${NODE_MQTT_PASSWORD}
-#    networks:
-#      - cloud-network
+  #  node-bff:
+  #    image: shiviraj/node-bff:latest
+  #    container_name: node-bff
+  #    restart: unless-stopped
+  #    environment:
+  #      API_GATEWAY_BASE_URL: http://auth-service:9001
+  #      MQTT_URL: mqtt://node-mqtt:1883
+  #      ENVIRONMENT: prod
+  #      MQTT_USERNAME: ${NODE_MQTT_USERNAME}
+  #      MQTT_PASSWORD: ${NODE_MQTT_PASSWORD}
+  #    networks:
+  #      - cloud-network
 
   auth-service:
     image: shiviraj/auth-service:latest
