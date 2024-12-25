@@ -105,6 +105,8 @@ services:
       AUTH_SERVICE_BASE_URL: http://auth-service:9001
       USER_SERVICE_BASE_URL: http://user-service:9002
       PREMISES_SERVICE_BASE_URL: http://premises-service:9004
+      DEVICE_SERVICE_BASE_URL: http://device-service:9005
+      MASTER_DATA_SERVICE_BASE_URL: http://master-data-service:9006
     networks:
       - cloud-network
 
@@ -170,6 +172,38 @@ services:
       AUTH_SERVICE_BASE_URL: http://auth-service:9001
       INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
       KAFKA_BOOTSTRAP_BROKERS: kafka:3030
+    networks:
+      - cloud-network
+
+  device-service:
+    image: shiviraj/device-service:latest
+    restart: unless-stopped
+    environment:
+      PORT: 9005
+      MONGODB_URL: mongodb://mongo:27017
+      AUTH_SERVICE_BASE_URL: http://auth-service:9001
+      INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
+      KAFKA_BOOTSTRAP_BROKERS: kafka:3030
+      PREMISES_SERVICE_BASE_URL: http://premises-service:9004
+    networks:
+      - cloud-network
+
+  master-data-service:
+    image: shiviraj/master-data-service:latest
+    restart: unless-stopped
+    environment:
+      PORT: 9006
+      MONGODB_URL: mongodb://mongo:27017
+      AUTH_SERVICE_BASE_URL: http://auth-service:9001
+      INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
+      KAFKA_BOOTSTRAP_BROKERS: kafka:3030
+    networks:
+      - cloud-network
+
+  seed-data:
+    image: shiviraj/seed-data:latest
+    environment:
+      MONGODB_URL: mongodb://mongo:27017
     networks:
       - cloud-network
 
