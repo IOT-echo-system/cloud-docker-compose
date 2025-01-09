@@ -172,6 +172,7 @@ services:
       AUTH_SERVICE_BASE_URL: http://auth-service:9001
       INTERNAL_ACCESS_TOKEN: ${INTERNAL_ACCESS_TOKEN}
       KAFKA_BOOTSTRAP_BROKERS: kafka:3030
+      PREMISES_SERVICE_BASE_URL: http://premises-service:9004
     networks:
       - cloud-network
 
@@ -200,12 +201,12 @@ services:
     networks:
       - cloud-network
 
-  seed-data:
-    image: shiviraj/seed-data:latest
-    environment:
-      MONGODB_URL: mongodb://mongo:27017
-    networks:
-      - cloud-network
+#  seed-data:
+#    image: shiviraj/seed-data:latest
+#    environment:
+#      MONGODB_URL: mongodb://mongo:27017
+#    networks:
+#      - cloud-network
 
 networks:
   cloud-network:
