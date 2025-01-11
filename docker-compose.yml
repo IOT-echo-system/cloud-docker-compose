@@ -176,8 +176,8 @@ services:
     networks:
       - cloud-network
 
-  device-service:
-    image: shiviraj/device-service:latest
+  feed-service:
+    image: shiviraj/feed-service:latest
     restart: unless-stopped
     environment:
       PORT: 9005
@@ -200,13 +200,6 @@ services:
       KAFKA_BOOTSTRAP_BROKERS: kafka:3030
     networks:
       - cloud-network
-
-#  seed-data:
-#    image: shiviraj/seed-data:latest
-#    environment:
-#      MONGODB_URL: mongodb://mongo:27017
-#    networks:
-#      - cloud-network
 
 networks:
   cloud-network:
