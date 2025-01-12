@@ -41,6 +41,8 @@ services:
     command: [ "redis-server", "--appendonly", "yes" ]
     volumes:
       - ./redis-data:/data
+    networks:
+      - cloud-network
 
   #  node-mqtt:
   #    container_name: node-mqtt
