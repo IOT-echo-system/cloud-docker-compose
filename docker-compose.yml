@@ -146,6 +146,10 @@ services:
       KAFKA_BOOTSTRAP_BROKERS: kafka:3030
       REDIS_HOST: redis
       REDIS_PORT: 6379
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongo
     networks:
       - cloud-network
 
@@ -162,6 +166,10 @@ services:
       KAFKA_BOOTSTRAP_BROKERS: kafka:3030
       REDIS_HOST: redis
       REDIS_PORT: 6379
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongo
     networks:
       - cloud-network
 
@@ -176,6 +184,10 @@ services:
       KAFKA_BOOTSTRAP_BROKERS: kafka:3030
       REDIS_HOST: redis
       REDIS_PORT: 6379
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongo
     networks:
       - cloud-network
 
@@ -191,6 +203,10 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       PREMISES_SERVICE_BASE_URL: http://premises-service:9004
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongo
     networks:
       - cloud-network
 
@@ -206,6 +222,10 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       PREMISES_SERVICE_BASE_URL: http://premises-service:9004
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongo
     networks:
       - cloud-network
 
@@ -220,6 +240,10 @@ services:
       KAFKA_BOOTSTRAP_BROKERS: kafka:3030
       REDIS_HOST: redis
       REDIS_PORT: 6379
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongo
     networks:
       - cloud-network
 

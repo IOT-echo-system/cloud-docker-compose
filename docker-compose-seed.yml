@@ -5,6 +5,8 @@ services:
     image: shiviraj/seed-data:latest
     environment:
       MONGODB_URL: mongodb://mongo:27017
+    depends_on:
+      - mongo
     networks:
       - cloud-network
 
